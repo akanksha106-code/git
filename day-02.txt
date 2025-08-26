@@ -1,0 +1,111 @@
+Git Notes – Part 2
+
+1. Git Restore
+The `git restore` command is used to recover a deleted/modified file.
+
+👉 Note: You must know whether the file is staged, committed, or just deleted to use the right option.
+
+Scenario 1: Deleted but not staged
+- File is deleted in working directory but not yet staged.
+    git restore filename
+✔ Restores file from last commit.
+
+Scenario 2: Deleted and staged for commit
+- File was deleted and added to staging area.
+    git restore --staged filename   # remove from staging
+    git restore filename            # bring back file content
+✔ Restores file in both staging and working directory.
+
+Scenario 3: Deleted, staged and committed
+- File was committed as deleted.
+    git log --oneline               # find commit ID before deletion
+    git checkout <commitID> -- filename
+✔ Restores file from previous commit.
+
+Scenario 4: Don’t know the file name
+    git log --stat                  # see list of deleted files
+    git restore filename
+✔ Use logs to find missing file.
+
+--------------------------------------------------
+
+2. Git Stash
+👉 Stash = Temporary storage for unfinished work (not ready for staging/commit).
+
+Example Workflow:
+- 10:00 → TL assigns a task → you start coding (task1.java).
+- 10:10 → Work is half-done (not ready to commit).
+- 11:30 → TL asks to stop and do another urgent task.
+
+Instead of committing half-done code:
+    git stash               # save unfinished work
+    git stash list          # see list of stashes
+    git stash apply         # apply latest stash
+    git stash apply stash@{2}   # apply specific stash
+    git stash pop           # apply and delete stash
+
+👉 After `git stash`,
+- Files disappear from working directory.
+- `git status` shows clean tree.
+
+✔ Use stash when switching tasks without losing progress.
+
+--------------------------------------------------
+
+3. GitHub Basics
+
+What is GitHub?
+- Cloud platform to host Git repositories.
+- Free tier: 2 GB storage.
+- Provides collaboration, version control, pull requests, etc.
+
+3.1 GitHub Account Setup
+1. Sign up → https://github.com
+2. Create repository → choose Public (open to all) or Private (restricted access).
+
+3.2 Repository URL
+Every repo has a unique URL:
+    https://github.com/UserName/repo-name.git
+👉 Used for push (local → remote) and pull/clone (remote → local).
+
+3.3 Clone Remote Repo
+    git clone <Repo-URL>
+✔ Creates a local copy + .git folder.
+✔ Default branch is usually main.
+
+3.4 Push Local Code to Remote
+    git add .
+    git commit -m "Initial commit"
+    git push -u origin main
+⚠️ If push fails → configure PAT (Personal Access Token) for authentication.
+
+3.5 Pull Remote Changes
+    git pull origin main
+✔ Fetches + merges new commits from remote to local.
+
+Example: 2 Developers Workflow
+- Dev1: Pulls code at 10:00 → creates file → commits → pushes at 10:30.
+- Dev2: Creates file in GitHub at 10:20.
+- Dev1 must `git pull` first to get Dev2’s changes before pushing.
+
+--------------------------------------------------
+
+4. Forking a Repo
+👉 Fork = Copy of someone else’s repo to your GitHub account.
+
+- Use case: Contribute to open-source projects.
+- After fork, your repo stays in sync with owner’s repo.
+
+Example:
+- Original Repo → github.com/owner/project.git
+- Forked Repo → github.com/yourname/project.git
+- You can make changes, push to your repo, then create a pull request to contribute back.
+
+--------------------------------------------------
+
+✅ Summary (Part 2)
+- git restore → recover deleted/modified files.
+- git stash → temporarily save unfinished work.
+- GitHub → host & collaborate on code.
+- clone/push/pull → connect local ↔ remote.
+- fork → copy someone else’s repo to your GitHub account.
