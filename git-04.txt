@@ -1,0 +1,137 @@
+
+ Git Part 4 – Cheat Sheet
+
+ 1. Git Configuration
+
+Set username → `git config --global user.name "Your Name"`
+Set email → `git config --global user.email "your@email.com"`
+Check config → `git config --list`
+
+---
+
+2. Git Lifecycle Basics
+
+Check status → `git status`
+Add file to staging → `git add file.txt`
+Add all files → `git add .`
+Commit changes → `git commit -m "Commit message"`
+Skip staging (direct commit) → Not allowed. Files must go through staging area first.
+
+---
+
+3. File Operations
+
+Restore deleted/modified file
+
+  If deleted but not staged → `git restore file.txt`
+  If deleted & staged → `git restore --staged file.txt && git restore file.txt`
+  If committed & deleted → `git checkout HEAD~1 -- file.txt`
+  If filename unknown → `git log --stat` (to check history)
+
+---
+
+4. Git Stash
+
+Save uncommitted work → `git stash`
+List stashes → `git stash list`
+Apply stash → `git stash apply`
+Apply specific stash → `git stash apply stash@{id}`
+Drop stash → `git stash drop stash@{id}`
+Clear all stashes → `git stash clear`
+
+---
+
+ 5. Working with Remote Repositories
+
+Clone repo → `git clone <repo-url>`
+Check remotes → `git remote -v`
+Push to remote → `git push -u origin main`
+Pull changes → `git pull origin main`
+Fetch changes (without merge) → `git fetch`
+
+---
+
+ 6. Branching
+
+List branches → `git branch`
+Create branch → `git branch feature-1`
+Switch branch → `git checkout feature-1`
+Create & switch → `git checkout -b feature-1`
+Rename branch → `git branch -m oldName newName`
+Delete branch (local) → `git branch -D feature-1`
+Delete branch (remote) → `git push origin --delete feature-1`
+
+---
+
+ 7. Merge & Rebase
+
+Merge branch →
+
+  ```bash
+  git checkout main
+  git merge feature-1
+  ```
+Rebase branch →
+
+  ```bash
+  git checkout feature-1
+  git rebase main
+  ```
+Difference :
+
+  Merge → keeps history, shows branch commits separately.
+  Rebase → linear history, rewrites commits.
+
+---
+
+ 8. Handling Merge Conflicts
+
+Open the conflicting file → Look for `<<<<<<<`, `=======`, `>>>>>>>`.
+Edit to keep required code.
+Mark resolved → `git add file.txt`
+Commit → `git commit -m "Resolved conflict"`
+
+---
+
+ 9. Git Ignore
+
+Create `.gitignore` file and list patterns:
+
+  ```
+  *.log
+  node_modules/
+  .env
+  ```
+Prevents listed files from being tracked.
+
+---
+
+ 10. GitHub Workflow
+
+1. Create repo on GitHub.
+2. Initialize locally → `git init`
+3. Add remote → `git remote add origin <repo-url>`
+4. Push code → `git push -u origin main`
+
+---
+
+11. Forking
+
+ Fork repo from one account to another.
+ Clone forked repo, work, and push changes.
+ Submit Pull Request (PR) to original repo.
+
+---
+
+ 12. Useful Commands
+
+View commit history → `git log --oneline --graph --decorate`
+Show last commit → `git show HEAD`
+Undo last commit (keep changes) → `git reset --soft HEAD~1`
+Undo last commit (discard changes) → `git reset --hard HEAD~1`
+Clean untracked files → `git clean -f`
+
+---
+
+👉 This cheat sheet covers config, workflow, stash, restore, branches, merging, rebase, conflicts, ignore, remote, GitHub & useful commands — all essential for quick reference.
+
