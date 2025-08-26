@@ -1,1 +1,170 @@
+Git (Part 1)
+
+📌 Overview
+I began learning Git, a distributed version control system that helps track changes, collaborate in teams, and maintain the complete history of a project.  
+
+Version control is a fundamental skill for DevOps engineers since it is used in CI/CD pipelines, infrastructure-as-code, and team collaboration.  
+
+---
+
+🔹 Installation
+
+On Linux (VMs / Servers)
+- Amazon Linux
+  sudo yum install git -y
+
+- Ubuntu
+  sudo apt install git -y
+
+On Windows
+Download and install Git from → https://git-scm.com/downloads/win
+
+Verify Installation
+  git --version
+
+---
+
+🔹 Configuration (One-time Setup)
+
+Set your global identity:
+  git config --global user.name "YourName"
+  git config --global user.email "youremail@example.com"
+
+Check values:
+  git config user.name
+  git config user.email
+
+List all configurations:
+  git config --list
+
+Note: This setup is required only once per system.
+
+If you want to remove saved GitHub credentials on Windows:
+- Open Credential Manager → Windows Credentials → Find Git-related entries → Remove
+
+---
+
+🔹 Git Concepts
+
+Git tracks files in 4 main areas:
+
+1. Working Directory – Where files are created/edited  
+2. Staging Area – Changes marked for commit (git add)  
+3. Local Repository – Commits stored locally (.git/)  
+4. Remote Repository – Hosted on GitHub/GitLab/Bitbucket  
+
+Visual Workflow
+[ Working Directory ] -- git add --> [ Staging Area ] -- git commit --> [ Local Repository ] -- git push --> [ Remote Repository ]
+
+---
+
+🔹 Git Workflow (Step by Step)
+
+1. Create a folder and initialize Git
+   mkdir myproject
+   cd myproject
+   git init
+
+2. Create files & check status
+   echo "Hello Git" > file1.txt
+   git status
+
+3. Add files to staging area
+   git add file1.txt       # Add specific file
+   git add .               # Add all files
+
+4. Commit changes to local repo
+   git commit -m "Initial commit"
+
+5. View commit history
+   git log
+   git log --oneline
+   git log -2
+
+6. See changes
+   git show                 # Show details of last commit
+   git show <commit_id>     # Show details of specific commit
+   git diff                 # Compare working vs staged
+   git diff <id1>..<id2>    # Compare two commits
+
+7. Push to remote (GitHub)
+   git remote add origin <repo_url>
+   git branch -M main
+   git push -u origin main
+
+---
+
+🔹 Essential Git Commands
+
+git init                   → Initialize a new repo
+git clone <url>            → Clone remote repo
+git status                 → Show status of files
+git add <file>             → Stage specific file
+git add .                  → Stage all files
+git commit -m "msg"        → Commit changes
+git log                    → View commit history
+git log --oneline          → Compact commit history
+git log --stat             → Show modified files and stats
+git show                   → Show details of last commit
+git diff                   → Compare changes
+git blame <file>           → See who changed each line
+git commit --amend         → Modify last commit
+git remote -v              → Show remote repos
+git push origin main       → Push changes to GitHub
+git pull origin main       → Pull latest changes
+
+---
+
+🔹 Advanced Log Commands
+
+Show last 2 commits (short)
+  git log --oneline -2
+
+Show commits with author filter
+  git log --oneline --author="YourName"
+
+Custom commit log format
+  git log --pretty=format:"%h - %an (%ar): %s"
+
+---
+
+🔹 Practical Examples
+
+Create & Commit File
+  echo "My first Git file" > file1.txt
+  git add file1.txt
+  git commit -m "Added file1.txt"
+
+View History
+  git log --oneline
+
+Update Last Commit Message
+  git commit --amend -m "Updated commit message"
+
+---
+
+🔹 Notes & Pro-Tips
+
+- Always run git status to know the current state of your repo.  
+- Use git add -p to stage changes interactively.  
+- git diff shows changes not yet staged.  
+- git log --graph gives a tree view of commits.  
+- Every Git command starts with git.  
+
+---
+
+🛠️ What I Practiced
+- Installed and configured Git on both Linux VM and Windows system.  
+- Created a test repo, added files, and committed changes.  
+- Explored commit history with different log options.  
+- Compared changes using git show and git diff.  
+- Amended a commit message for correction.  
+
+---
+
+💡 Key Takeaway
+Git is more than just a backup tool—it’s a history keeper and collaboration enabler. Understanding the working → staging → commit → push workflow gives me confidence to manage code systematically.  
+
+Even small steps like viewing logs and diffs make it easier to debug, collaborate, and avoid mistakes in projects.  
+
 
